@@ -6,127 +6,120 @@ import useIsMobile from "@/hooks/use-mobile";
 import { CircleCheck } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-
-interface propType {
-  ismobile: Boolean;
-}
+import { useEffect } from "react";
 
 export default function Home() {
-  const ismobile = useIsMobile();
-
   return (
     <div className="flex flex-col items-center p-8">
-      <HeroSection ismobile={ismobile} />
-      <BannerSection ismobile={ismobile} />
-      <HowItWorks ismobile={ismobile} />
-      <CreateQuizSection ismobile={ismobile} />
+      <HeroSection />
+      <BannerSection />
+      <HowItWorks />
+      <CreateQuizSection />
     </div>
   );
 }
 
 const AnimatedPhone = () => {
   return (
-    <div className="">
-      <div className="relative w-180 top-0 left-0">
-        <Image
-          className="absolute"
-          width={700}
-          height={700}
-          src="/images/phone.svg"
-          alt="phone"
-        />
-        <motion.div
-          initial={{ x: -20, opacity: 0 }}
-          whileInView={{
-            x: 0,
-            opacity: 1,
-            transition: { duration: 0.3, delay: 0.3 },
-          }}
-          className=" absolute w-45 h-20 top-50 left-65 border-2 border-black"
-        ></motion.div>
-        <motion.div
-          initial={{ x: 20, opacity: 0 }}
-          whileInView={{
-            x: 0,
-            opacity: 1,
-            transition: { duration: 0.3, delay: 0.8 },
-          }}
-          className="absolute w-20 h-10 top-80 left-90 border-2 border-black"
-        ></motion.div>
-        <motion.div
-          initial={{ x: 20, opacity: 0 }}
-          whileInView={{
-            x: 0,
-            opacity: 1,
-            transition: {
-              duration: 0.3,
-              delay: 0.8,
+    <div className="relative w-180 top-0 left-0">
+      <Image
+        className="absolute"
+        width={700}
+        height={700}
+        src="/images/phone.svg"
+        alt="phone"
+      />
+      <motion.div
+        initial={{ x: -20, opacity: 0 }}
+        whileInView={{
+          x: 0,
+          opacity: 1,
+          transition: { duration: 0.3, delay: 0.3 },
+        }}
+        className=" absolute w-45 h-20 top-50 left-65 border-2 border-black rounded-md"
+      ></motion.div>
+      <motion.div
+        initial={{ x: 20, opacity: 0 }}
+        whileInView={{
+          x: 0,
+          opacity: 1,
+          transition: { duration: 0.3, delay: 0.8 },
+        }}
+        className="absolute w-20 h-10 top-80 left-90 border-2 border-black rounded-md"
+      ></motion.div>
+      <motion.div
+        initial={{ x: 20, opacity: 0 }}
+        whileInView={{
+          x: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.3,
+            delay: 0.8,
+          },
+        }}
+        className="absolute w-20 h-10 top-80 left-65 border-2 border-black rounded-md"
+      ></motion.div>
+      <motion.div
+        initial={{ x: 20, opacity: 0 }}
+        whileInView={{
+          x: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.3,
+            delay: 1.2,
+          },
+        }}
+        className="absolute w-20 h-10 top-95 left-90 border-2 border-black rounded-md"
+      ></motion.div>
+      <motion.div
+        initial={{ x: 20, opacity: 0 }}
+        whileInView={{
+          x: 0,
+          opacity: 1,
+          scale: 1.2,
+          transition: {
+            duration: 0.3,
+            delay: 1.2,
+            scale: {
+              delay: 2,
+              repeat: Infinity,
+              repeatType: "reverse",
+              repeatDelay: 1,
             },
-          }}
-          className="absolute w-20 h-10 top-80 left-65 border-2 border-black"
-        ></motion.div>
-        <motion.div
-          initial={{ x: 20, opacity: 0 }}
-          whileInView={{
-            x: 0,
-            opacity: 1,
-            transition: {
-              duration: 0.3,
-              delay: 1.2,
-            },
-          }}
-          className="absolute w-20 h-10 top-95 left-90 border-2 border-black"
-        ></motion.div>
-        <motion.div
-          initial={{ x: 20, opacity: 0 }}
-          whileInView={{
-            x: 0,
-            opacity: 1,
-            scale: 1.2,
-            transition: {
-              duration: 0.3,
-              delay: 1.2,
-              scale: {
-                delay: 2,
-                repeat: Infinity,
-                repeatType: "reverse",
-                repeatDelay: 1,
-              },
-            },
-          }}
-          className="absolute w-20 h-10 top-95 left-65 border-2 border-black"
-        ></motion.div>
-      </div>
+          },
+        }}
+        className="absolute w-20 h-10 top-95 left-65 border-2 border-black rounded-lg"
+      ></motion.div>
     </div>
   );
 };
 
-const HeroSection = ({ ismobile }: propType) => {
+const HeroSection = () => {
   return (
-    <section className="flex  justify-between">
+    <section className="md:flex ">
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1, transition: { duration: 0.3 } }}
-        className="w-[40%] border-1"
+        className="w-full md:m-10 md:p-10 md:border-1"
       >
         <H1Title
-          className="m-20"
+          className=""
           text="Create, Assign, and Analyze Quizzes — All in One Place"
         />
         <H4Text
-          className="m-20"
+          className="mt-5"
           text="A modern quiz management platform built for teachers and students.
             Create interactive quizzes, track performance, and save hours of
             grading."
         />
-        <Button className="m-20" variant="secondary">
+        <Button className="mt-5" variant="secondary">
           Get Started!
         </Button>
       </motion.div>
       <motion.div
         initial={{ x: 100, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1, transition: { duration: 0.3 } }}
-        className=" w-[50%]"
+        className="w-full h-screen hidden md:block"
       >
         <AnimatedPhone />
       </motion.div>
@@ -134,7 +127,7 @@ const HeroSection = ({ ismobile }: propType) => {
   );
 };
 
-const BannerSection = ({ ismobile }: propType) => {
+const BannerSection = () => {
   const steps = [
     {
       title: "Easy Quiz Creation",
@@ -158,7 +151,7 @@ const BannerSection = ({ ismobile }: propType) => {
         opacity: 1,
         transition: { duration: 0.5 },
       }}
-      className="flex items-center justify-between w-full m-20 bg-black/5"
+      className="flex flex-col md:flex-row mt-20 items-center w-full bg-black/5 overflow-hidden"
     >
       <H1Title
         className="m-20"
@@ -180,7 +173,7 @@ const BannerSection = ({ ismobile }: propType) => {
               <H2Title className="m-10" text={step.title} />
               <CircleCheck size={64} className="m-10" />
             </div>
-            <H4Text className="m-10" text={step.text} />
+            <H4Text className="m-10 mt-0" text={step.text} />
           </motion.div>
         );
       })}
@@ -188,12 +181,12 @@ const BannerSection = ({ ismobile }: propType) => {
   );
 };
 
-const HowItWorks = ({ ismobile }: propType) => {
+const HowItWorks = () => {
   return (
-    <section className="flex flex-col items-center justify-center">
+    <section className="flex flex-col mt-20 items-center justify-center">
       <H1Title text="How it works" />
 
-      <div className="flex items-center justify-between w-full m-20">
+      <div className="flex flex-col md:flex-row items-center justify-between w-full m-20">
         <div className="flex flex-col items-center">
           <H2Title text="1." />
           <H4Text className="m-10" text="Create a quiz" />
@@ -211,7 +204,7 @@ const HowItWorks = ({ ismobile }: propType) => {
   );
 };
 
-const CreateQuizSection = ({ ismobile }: propType) => {
+const CreateQuizSection = () => {
   return (
     <motion.section
       initial={{ y: 0, opacity: 0 }}
