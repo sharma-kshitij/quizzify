@@ -132,14 +132,9 @@ const page = () => {
                 key={ques.id}
                 className="grid grid-cols-[10%_80%_10%] md:grid-cols-[5%_90%_5%] pr-5 pl-2 md:p-10"
               >
-                <H2Title
-                  // className="mr-5"
-                  text={`${(ind + 1).toString()}. `}
-                />
+                <H2Title text={`${(ind + 1).toString()}. `} />
                 <div>
-                  {/* <div className="flex"> */}
                   <H2Title text={ques.question} />
-                  {/* </div> */}
                   {ques.options.map((opt, index) => {
                     return (
                       <H4Text
@@ -147,7 +142,7 @@ const page = () => {
                         text={`${String.fromCharCode(index + 65)}) ${opt}`}
                         className={`my-3 p-2 ${
                           ques.answer.includes(index)
-                            ? " border-2 border-green-400 "
+                            ? " border-2 border-green-400 bg-green-100 rounded-sm"
                             : ""
                         } `}
                       />
