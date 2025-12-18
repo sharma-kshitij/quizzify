@@ -3,7 +3,7 @@
 import { H2Title, H4Text } from "@/components/Typography/Typography";
 import { Pencil, Trash } from "lucide-react";
 import { AnimatePresence } from "motion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -93,7 +93,7 @@ const page = () => {
       <section>
         <input
           type="text"
-          className="text-6xl font-extrabold w-full text-center outline-none border-none "
+          className="text-6xl font-extrabold w-full text-center outline-none border-none mt-5"
           value={quizName}
           onChange={(e) => {
             setQuizName(e.target.value);
