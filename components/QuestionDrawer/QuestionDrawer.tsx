@@ -186,7 +186,7 @@ const QuestionDrawer = ({
           <div className="w-full grid grid-cols-2 gap-5">
             <Button
               onClick={() => {
-                handleQuestionsave({ ...currentQues, id: Date.now() });
+                handleQuestionsave(currentQues);
               }}
             >
               Save

@@ -32,14 +32,19 @@ const page = () => {
     toast("Question Deleted", {
       action: {
         label: "Undo",
-        onClick: () => addQuestion(question, true),
+        onClick: () =>
+          setQuestions((oldvalue) => {
+            return [...oldvalue, question].sort((a, b) => {
+              return a.id - b.id;
+            });
+          }),
       },
     });
   };
 
-  const addQuestion = (question: questionType, noToast: boolean) => {
+  const addNewQuestion = (question: questionType, noToast: boolean) => {
     setQuestions((oldvalue) => {
-      return [...oldvalue, question].sort((a, b) => {
+      return [...oldvalue, { ...question, id: Date.now() }].sort((a, b) => {
         return a.id - b.id;
       });
     });
@@ -48,14 +53,16 @@ const page = () => {
     }
   };
 
-  const editQuestion = (question: questionType) => {
+  const editQuestion = (question: questionType, noToast: boolean) => {
     setQuestions(
       questions.map((ques) => {
         if (ques.id === question.id) {
           if (ques === question) {
             return ques;
           } else {
-            toast.success("Question Updated");
+            if (!noToast) {
+              toast.success("Question Updated");
+            }
             return question;
           }
         } else return ques;
@@ -79,7 +86,7 @@ const page = () => {
       <section className="flex justify-center m-5 gap-5">
         <QuestionDrawer
           initialQuestion={initialQuestion}
-          submitQuestion={addQuestion}
+          submitQuestion={addNewQuestion}
         >
           <Button className="px-10 py-5 cursor-pointer">
             <H4Text text="Add a question" />
@@ -128,12 +135,7 @@ const page = () => {
                     initialQuestion={ques}
                     submitQuestion={editQuestion}
                   >
-                    <Pencil
-                      onClick={() => {
-                        console.log(ques);
-                      }}
-                      className="m-5 cursor-pointer"
-                    />
+                    <Pencil className="m-5 cursor-pointer" />
                   </QuestionDrawer>
                   <Trash
                     className="m-5 cursor-pointer"
