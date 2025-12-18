@@ -130,7 +130,7 @@ const page = () => {
                 }}
                 layout
                 key={ques.id}
-                className="grid grid-cols-[3%_90%_10%] p-10 "
+                className="grid md:grid-cols-[3%_90%_10%] grid-cols-[8%_90%_10%] p-10 "
               >
                 <H2Title text={`${(ind + 1).toString()}.`} />
                 <div>
