@@ -119,7 +119,7 @@ const page = () => {
       </section>
       <section>
         <AnimatePresence>
-          {questions.map((ques) => {
+          {questions.map((ques, ind) => {
             return (
               <motion.div
                 initial={{ x: -100, opacity: 0 }}
@@ -130,8 +130,9 @@ const page = () => {
                 }}
                 layout
                 key={ques.id}
-                className="grid grid-cols-[90%_10%] p-10 "
+                className="grid grid-cols-[3%_90%_10%] p-10 "
               >
+                <H2Title text={`${(ind + 1).toString()}.`} />
                 <div>
                   <H2Title text={ques.question} />
                   {ques.options.map((opt, index) => {
