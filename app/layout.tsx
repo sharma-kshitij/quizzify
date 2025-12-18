@@ -19,7 +19,7 @@ const abel = Abel({
 
 export const metadata: Metadata = {
   title: "Quizzify",
-  description: "You own quiz management app!",
+  description: "Your own quiz management app!",
 };
 
 export default function RootLayout({
