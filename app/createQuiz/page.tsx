@@ -130,10 +130,16 @@ const page = () => {
                 }}
                 layout
                 key={ques.id}
-                className="grid grid-cols-[90%_10%]  p-10 "
+                className="grid grid-cols-[10%_80%_10%] md:grid-cols-[5%_90%_5%] pr-5 pl-2 md:p-10"
               >
+                <H2Title
+                  // className="mr-5"
+                  text={`${(ind + 1).toString()}. `}
+                />
                 <div>
+                  {/* <div className="flex"> */}
                   <H2Title text={ques.question} />
+                  {/* </div> */}
                   {ques.options.map((opt, index) => {
                     return (
                       <H4Text
