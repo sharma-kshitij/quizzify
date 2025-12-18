@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -35,6 +35,8 @@ const QuestionDrawer = ({
     noAnswers: false,
   });
 
+  const [showDrawer, setShowDrawer] = useState(false);
+
   const [currentQues, setCurrentQuestion] =
     useState<questionType>(initialQuestion);
 
@@ -67,11 +69,12 @@ const QuestionDrawer = ({
 
     if (checkErrorArr(Object.values(errors))) {
       submitQuestion(question, false);
+      setShowDrawer(false);
     }
   };
 
   return (
-    <Drawer>
+    <Drawer open={showDrawer} onOpenChange={setShowDrawer}>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="overflow-auto">
