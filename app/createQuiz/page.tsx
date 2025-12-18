@@ -29,7 +29,12 @@ const page = () => {
         return ques.id != question.id;
       })
     );
-    toast("Question Deleted", {
+    toast.info("Question Deleted", {
+      classNames: {
+        title: "text-lg",
+        actionButton: "p-5 w-20 flex items-center justify-center !text-lg",
+      },
+      position: "top-center",
       action: {
         label: "Undo",
         onClick: () =>
@@ -49,7 +54,13 @@ const page = () => {
       });
     });
     if (!noToast) {
-      toast.success("Question Added");
+      toast.success("Question Added", {
+        position: "top-center",
+        classNames: {
+          title: "text-lg",
+          actionButton: "p-5 w-20 flex items-center justify-center !text-lg",
+        },
+      });
     }
   };
 
@@ -61,7 +72,14 @@ const page = () => {
             return ques;
           } else {
             if (!noToast) {
-              toast.success("Question Updated");
+              toast.success("Question Updated", {
+                position: "top-center",
+                classNames: {
+                  title: "text-lg",
+                  actionButton:
+                    "p-5 w-20 flex items-center justify-center !text-lg",
+                },
+              });
             }
             return question;
           }

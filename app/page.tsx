@@ -135,7 +135,7 @@ const BannerSection = () => {
       text: "Create quizzes in minutes and get instant insights into student performance.",
     },
     {
-      title: "Auto Grading",
+      title: "Auto Quiz Grading",
       text: "Create quizzes in minutes and get instant insights into student performance.",
     },
     {
