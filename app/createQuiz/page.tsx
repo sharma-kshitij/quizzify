@@ -1,0 +1,153 @@
+"use client";
+
+import { H2Title, H4Text } from "@/components/Typography/Typography";
+import { Pencil, Trash } from "lucide-react";
+import { AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
+import { questionType } from "@/components/types";
+import QuestionDrawer from "@/components/QuestionDrawer/QuestionDrawer";
+import { testQuestions } from "@/components/utils";
+
+const initialQuestion = {
+  id: 1,
+  question: "",
+  options: ["", "", "", ""],
+  answer: [],
+};
+
+const page = () => {
+  const [quizName, setQuizName] = useState("");
+  const [questions, setQuestions] = useState<questionType[]>(testQuestions);
+
+  const deleteQuestion = async (question: questionType) => {
+    setQuestions(
+      questions.filter((ques) => {
+        return ques.id != question.id;
+      })
+    );
+    toast("Question Deleted", {
+      action: {
+        label: "Undo",
+        onClick: () => addQuestion(question, true),
+      },
+    });
+  };
+
+  const addQuestion = (question: questionType, noToast: boolean) => {
+    setQuestions((oldvalue) => {
+      return [...oldvalue, question].sort((a, b) => {
+        return a.id - b.id;
+      });
+    });
+    if (!noToast) {
+      toast.success("Question Added");
+    }
+  };
+
+  const editQuestion = (question: questionType) => {
+    setQuestions(
+      questions.map((ques) => {
+        if (ques.id === question.id) {
+          if (ques === question) {
+            return ques;
+          } else {
+            toast.success("Question Updated");
+            return question;
+          }
+        } else return ques;
+      })
+    );
+  };
+
+  return (
+    <div>
+      <section>
+        <input
+          type="text"
+          className="text-6xl font-extrabold w-full text-center outline-none border-none "
+          value={quizName}
+          onChange={(e) => {
+            setQuizName(e.target.value);
+          }}
+          placeholder="Enter Quiz Name"
+        />
+      </section>
+      <section className="flex justify-center m-5 gap-5">
+        <QuestionDrawer
+          initialQuestion={initialQuestion}
+          submitQuestion={addQuestion}
+        >
+          <Button className="px-10 py-5 cursor-pointer">
+            <H4Text text="Add a question" />
+          </Button>
+        </QuestionDrawer>
+        <Button
+          className="px-10 py-5 cursor-pointer"
+          onClick={() => console.log(questions)}
+        >
+          <H4Text text="Save" />
+        </Button>
+      </section>
+      <section>
+        <AnimatePresence>
+          {questions.map((ques) => {
+            return (
+              <motion.div
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{
+                  x: 100,
+                  opacity: 0,
+                }}
+                layout
+                key={ques.id}
+                className="grid grid-cols-[90%_10%] p-10 "
+              >
+                <div>
+                  <H2Title text={ques.question} />
+                  {ques.options.map((opt, index) => {
+                    return (
+                      <H4Text
+                        key={index}
+                        text={`${String.fromCharCode(index + 65)}) ${opt}`}
+                        className={`my-3 p-2 ${
+                          ques.answer.includes(index)
+                            ? " border-2 border-green-400 "
+                            : ""
+                        } `}
+                      />
+                    );
+                  })}
+                </div>
+                <div className="flex flex-col items-start justify-start">
+                  <QuestionDrawer
+                    initialQuestion={ques}
+                    submitQuestion={editQuestion}
+                  >
+                    <Pencil
+                      onClick={() => {
+                        console.log(ques);
+                      }}
+                      className="m-5 cursor-pointer"
+                    />
+                  </QuestionDrawer>
+                  <Trash
+                    className="m-5 cursor-pointer"
+                    onClick={() => deleteQuestion(ques)}
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </section>
+      <section></section>
+    </div>
+  );
+};
+
+export default page;
