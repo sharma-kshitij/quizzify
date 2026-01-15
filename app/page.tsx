@@ -2,11 +2,10 @@
 
 import { H1Title, H2Title, H4Text } from "@/components/Typography/Typography";
 import { Button } from "@/components/ui/button";
-import useIsMobile from "@/hooks/use-mobile";
 import { CircleCheck } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { useEffect } from "react";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -112,8 +111,10 @@ const HeroSection = () => {
             Create interactive quizzes, track performance, and save hours of
             grading."
         />
-        <Button className="mt-5" variant="secondary">
-          Get Started!
+        <Button className="mt-5" variant="default">
+          <Link href="/createQuiz">
+            <H4Text className="p-2" text="Get Started" />
+          </Link>
         </Button>
       </motion.div>
       <motion.div
@@ -134,7 +135,7 @@ const BannerSection = () => {
       text: "Create quizzes in minutes and get instant insights into student performance.",
     },
     {
-      title: "Auto Grading",
+      title: "Auto Quiz Grading",
       text: "Create quizzes in minutes and get instant insights into student performance.",
     },
     {
@@ -213,7 +214,9 @@ const CreateQuizSection = () => {
     >
       <H1Title className="m-20" text="Ready to make assesments effortless?" />
       <Button className="py-10 px-5 mb-20" variant="secondary">
-        <H4Text text="Create your first quiz" />
+        <Link href="/createQuiz">
+          <H4Text text="Create your first quiz" />
+        </Link>
       </Button>
     </motion.section>
   );
